@@ -1,0 +1,15 @@
+.component-margin {
+	margin: 10px 200px;
+}
+.header {
+	height: 64px;
+}
+.footer {
+	height: 64px;
+}
+
+.content {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	min-height: calc(100vh - 188px);
+}
