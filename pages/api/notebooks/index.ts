@@ -23,7 +23,12 @@ export default async function handler(
 		case 'POST':
 			try {
 				const { title, image_url, content, userId } = req.body
-				const newNotebook = new Notebook({ title, image_url, content, userId })
+				const newNotebook = new Notebook({
+					title,
+					image_url,
+					content,
+					userId: userId || '64c290e572c6759614dfe861',
+				})
 				const notebook = await newNotebook.save()
 				res.status(201).json({ data: notebook })
 			} catch (error) {

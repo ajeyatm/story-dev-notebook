@@ -34,14 +34,16 @@ export default async function handler(
 					break
 				}
 
-				let _temperature = parseInt(temperature ?? '0')
-				let _maxTokens = parseInt(maxTokens ?? '0')
+				// let _temperature = parseInt(temperature ?? '0')
+				// let _maxTokens = parseInt(maxTokens ?? '0')
 
 				const completion = await openai.createCompletion({
 					model: 'text-davinci-003',
 					prompt: generatePrompt(prompt, context),
-					temperature: _temperature || 0.6,
-					max_tokens: _maxTokens > 500 ? 500 : _maxTokens,
+					// temperature: _temperature || 0.6,
+					// max_tokens: _maxTokens > 500 ? 500 : _maxTokens,
+					temperature: 0.6,
+					max_tokens: 500,
 				})
 
 				console.log(completion.data.choices)
@@ -50,7 +52,7 @@ export default async function handler(
 			} catch (error: any) {
 				console.error('error--', error?.response)
 
-				res.status(500).json({ error: 'Failed to create image.' })
+				res.status(500).json({ error: 'Failed to create text.' })
 			}
 			break
 

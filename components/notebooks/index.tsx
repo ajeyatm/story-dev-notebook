@@ -8,6 +8,7 @@ const { Meta } = Card
 
 import { INotebook } from '@/interfaces'
 import { useFetchNoteBooks } from '@/services/notebooks'
+import Image from 'next/image'
 
 const Notebooks = () => {
 	const router = useRouter()
@@ -24,9 +25,11 @@ const Notebooks = () => {
 					<Col key={notebook._id} xs={2} sm={4} md={6} lg={8} xl={10}>
 						<Card
 							cover={
-								<img
+								<Image
 									alt={notebook._id}
 									// src={notebook.image_url}
+									height={200}
+									width={200}
 									// src='https://loremflickr.com/320/240/kitten,dogs'
 									src='https://source.unsplash.com/random/300x200?sig=${Math.random()'
 								/>
@@ -35,12 +38,14 @@ const Notebooks = () => {
 								<EditOutlined
 									key='edit'
 									onClick={() => router.push(`/notebooks/${notebook._id}`)}
+									className='link'
 								/>,
 								<ReadOutlined
 									key='read'
 									onClick={() => router.push(`/notebooks/${notebook._id}`)}
+									className='link'
 								/>,
-								<DeleteOutlined key='delete' />,
+								<DeleteOutlined key='delete' className='link' />,
 							]}
 						>
 							<Meta

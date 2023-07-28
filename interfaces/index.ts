@@ -8,4 +8,10 @@ export interface INotebook {
 	updatedAt: string
 }
 
-export interface IResNotebook {}
+export interface ITextCompletion {
+	context?: string
+	prompt: string
+}
+export interface IImageCompletion {
+	prompt: string
+}

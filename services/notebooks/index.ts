@@ -3,12 +3,19 @@ import useSWR from 'swr'
 import httpClient from '@/lib/http-client'
 import { INotebook } from '@/interfaces'
 
-export function useFetchNoteBooks() {
-	const url = '/notebooks'
-	const configFetcher = (url: string) =>
-		httpClient.get<{ data: INotebook[] }>(url)
+const swrOptiosn = {
+	refreshInterval: 30 * 60 * 1000,
+	revalidateOnReconnect: true,
+	revalidateOnMount: true,
+	errorRetryCount: 3,
+}
 
-	const { data, error } = useSWR(url, configFetcher)
+const urlNotebooks = '/notebooks'
+
+export function useFetchNoteBooks() {
+	const fetcher = (url: string) => httpClient.get<{ data: INotebook[] }>(url)
+
+	const { data, error } = useSWR(urlNotebooks, fetcher, swrOptiosn)
 
 	return {
 		data: data?.data,
@@ -16,17 +23,49 @@ export function useFetchNoteBooks() {
 		isLoading: !data && !error,
 	}
 }
-// export const createBanner = async (data: Partial<IBannerRecord>) => {
-// 	await httpClient.post<Partial<IBannerRecord>, unknown>(BANNERS, data)
-// }
+export const useCreateNoteBook = async (payload: Partial<INotebook>) => {
+	if (!payload) return
+	const creator = (url: string) =>
+		httpClient.post<Partial<{ data: INotebook }>, unknown>(url, payload)
 
-// export const updateBanner = async (data: Partial<IBannerRecord>) => {
-// 	await httpClient.put<Partial<IBannerRecord>, unknown>(
-// 		`${BANNERS}/${data._id}`,
-// 		data
-// 	)
-// }
+	const { data, error } = useSWR(urlNotebooks, creator, swrOptiosn)
 
-// export const deleteBanner = async (id: string) => {
-// 	await httpClient.delete(`${BANNERS}/${id}`)
-// }
+	return {
+		data,
+		error,
+		isLoading: !data && !error,
+	}
+}
+
+export const notBookCreator = (payload: Partial<INotebook>) =>
+	httpClient.post<Partial<{ data: INotebook }>, unknown>(urlNotebooks, payload)
+
+export const useUpdateNoteBook = async (
+	id: string,
+	payload: Partial<INotebook>
+) => {
+	if (!id || !payload) return
+	const updator = (url: string) =>
+		httpClient.put<Partial<{ data: INotebook }>, unknown>(url, payload)
+
+	const { data, error } = useSWR(`${urlNotebooks}/${id}`, updator, swrOptiosn)
+
+	return {
+		data,
+		error,
+		isLoading: !data && !error,
+	}
+}
+
+export const useDeleteNoteBook = async (id: string) => {
+	if (!id) return
+	const remover = (url: string) => httpClient.delete(url)
+
+	const { data, error } = useSWR(`${urlNotebooks}/${id}`, remover, swrOptiosn)
+
+	return {
+		data,
+		error,
+		isLoading: !data && !error,
+	}
+}
