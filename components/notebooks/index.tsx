@@ -4,11 +4,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Card, Spin, Avatar, Space, Row, Col, Typography } from 'antd'
 import { DeleteOutlined, EditOutlined, ReadOutlined } from '@ant-design/icons'
+import Image from 'next/image'
 const { Meta } = Card
 
 import { INotebook } from '@/interfaces'
 import { useFetchNoteBooks } from '@/services/notebooks'
-import Image from 'next/image'
+import { getImageDataURL } from '@/lib/image-helpers'
+
+
 
 const Notebooks = () => {
 	const router = useRouter()
@@ -31,7 +34,8 @@ const Notebooks = () => {
 									height={200}
 									width={200}
 									// src='https://loremflickr.com/320/240/kitten,dogs'
-									src='https://source.unsplash.com/random/300x200?sig=${Math.random()'
+									// src='https://source.unsplash.com/random/300x200?sig=${Math.random()'
+									src={getImageDataURL(notebook.imageId.data) ?? 'https://source.unsplash.com/random/300x200?sig=${Math.random()' }
 								/>
 							}
 							actions={[

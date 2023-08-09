@@ -17,6 +17,7 @@ export default async function handler(
 		case 'GET':
 			try {
 				const notebook = await Notebook.findById(id)
+				.populate('imageId', 'data contentType')
 				if (!notebook) {
 					return res.status(404).json({ error: 'Notebook not found.' })
 				}

@@ -23,6 +23,18 @@ export function useFetchNoteBooks() {
 		isLoading: !data && !error,
 	}
 }
+export function useFetchNoteBookById(notebookId:string |null) {
+	const fetcher = (url: string) => httpClient.get<{ data: INotebook }>(url)
+
+	const { data, error } = useSWR(notebookId ? `${urlNotebooks}/${notebookId}`: undefined, fetcher, swrOptiosn)
+
+	return {
+		data: data?.data,
+		error,
+		isLoading: !data && !error,
+	}
+}
+
 export const useCreateNoteBook = async (payload: Partial<INotebook>) => {
 	if (!payload) return
 	const creator = (url: string) =>

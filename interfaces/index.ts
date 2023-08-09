@@ -6,6 +6,10 @@ export interface INotebook {
 	userId: string
 	createdAt: string
 	updatedAt: string
+	imageId:{
+		data: Buffer,
+		contentType: string
+	}
 }
 
 export interface ITextCompletion {

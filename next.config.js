@@ -6,6 +6,7 @@ const nextConfig = {
 			'oaidalleapiprodscus.blob.core.windows.net',
 			'source.unsplash.com',
 			'loremflickr.com',
+			'thumbs.dreamstime.com'
 		],
 	},
 }

@@ -2,13 +2,10 @@ import { HomeOutlined, PlusOutlined } from '@ant-design/icons'
 import { Col, Row, Space, Typography } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useCallback } from 'react'
+import React from 'react'
 
 const Header = () => {
 	const router = useRouter()
-	console.log(router)
-
-	const pathName = useCallback(() => {}, [router.pathname])
 
 	return (
 		<>
