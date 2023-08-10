@@ -60,7 +60,6 @@ const GenerateNotebook = () => {
   // console.log('imageData--', imageData)
 
   const handlePromptGeneratorForm = async (values: Record<string, string>) => {
-    console.log("values--", values);
     const textPaylod = {
       context: values.context,
       prompt: values["text-prompt"],

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '@/lib/dbconnect'
 import Notebook from '@/models/Notebook'
+import Image from '@/models/Image'
 
 export default async function handler(
 	req: NextApiRequest,
@@ -49,6 +50,9 @@ export default async function handler(
 				const deletedNotebook = await Notebook.findByIdAndDelete(id)
 				if (!deletedNotebook) {
 					return res.status(404).json({ error: 'Notebook not found.' })
+				}
+				if(deletedNotebook){
+					await Image.findByIdAndDelete(deletedNotebook.imageId)
 				}
 				res.status(200).json({data:deletedNotebook, message: 'Notebook deleted successfully.' })
 			} catch (error) {

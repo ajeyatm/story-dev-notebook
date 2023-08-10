@@ -15,7 +15,6 @@ function generatePrompt(
 
 	_prompt += `Create me a bio using above information in third person view.\n`
 
-	console.log(_prompt)
 
 	return _prompt
 }

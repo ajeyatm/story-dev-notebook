@@ -11,7 +11,6 @@ function generatePrompt(prompt: string, context?: string) {
 	_prompt += `Topic: ${prompt}\n`
 
 	_prompt += `Content format should follow the following Exaple:\n Title: "Sample Title".\n Content: Sample Content`
-	console.log(_prompt)
 
 	return _prompt
 }
@@ -46,7 +45,6 @@ export default async function handler(
 					max_tokens: 500,
 				})
 
-				console.log(completion.data.choices)
 
 				res.status(201).json({ data: completion.data.choices[0].text })
 			} catch (error: any) {

@@ -40,7 +40,7 @@ export default async function handler(
           res.status(500).json({ error: "Failed to create Image Buffer." });
           return;
         }
-
+      if(!imageBuffer) return res.status(500).json({ error: "Failed to create Image Buffer." });
         // Create a new instance of your Image model
         const newImage = new Image({
           data: imageBuffer,
@@ -49,6 +49,7 @@ export default async function handler(
 
         // Save the image to MongoDB
         const image = await newImage.save();
+        
         if (!image) {
           res.status(500).json({ error: "Failed to store Image." });
           return;
@@ -61,6 +62,7 @@ export default async function handler(
           userId: userId || "64c290e572c6759614dfe861",
           imageId: image._id,
         });
+        
         const notebook = await newNotebook.save();
         res.status(201).json({ data: notebook });
       } catch (error) {

@@ -4,7 +4,7 @@ import httpClient from '@/lib/http-client'
 import { INotebook } from '@/interfaces'
 
 const swrOptiosn = {
-	refreshInterval: 30 * 60 * 1000,
+	refreshInterval: 10 * 1000,
 	revalidateOnReconnect: true,
 	revalidateOnMount: true,
 	errorRetryCount: 3,
