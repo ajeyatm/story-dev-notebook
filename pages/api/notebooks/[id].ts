@@ -50,7 +50,7 @@ export default async function handler(
 				if (!deletedNotebook) {
 					return res.status(404).json({ error: 'Notebook not found.' })
 				}
-				res.status(200).json({ message: 'Notebook deleted successfully.' })
+				res.status(200).json({data:deletedNotebook, message: 'Notebook deleted successfully.' })
 			} catch (error) {
 				res.status(500).json({ error: 'Failed to delete notebook.' })
 			}

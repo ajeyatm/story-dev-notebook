@@ -56,11 +56,11 @@ export const useUpdateNoteBook = async (
 	id: string,
 	payload: Partial<INotebook>
 ) => {
-	if (!id || !payload) return
+	
 	const updator = (url: string) =>
 		httpClient.put<Partial<{ data: INotebook }>, unknown>(url, payload)
 
-	const { data, error } = useSWR(`${urlNotebooks}/${id}`, updator, swrOptiosn)
+	const { data, error } = useSWR((!id || !payload) ? undefined :`${urlNotebooks}/${id}`, updator, swrOptiosn)
 
 	return {
 		data,
@@ -69,11 +69,11 @@ export const useUpdateNoteBook = async (
 	}
 }
 
-export const useDeleteNoteBook = async (id: string) => {
-	if (!id) return
+export const useDeleteNoteBook = async (id: string | null) => {
+	
 	const remover = (url: string) => httpClient.delete(url)
 
-	const { data, error } = useSWR(`${urlNotebooks}/${id}`, remover, swrOptiosn)
+	const { data, error } = useSWR(id ? `${urlNotebooks}/${id}`: undefined, remover, swrOptiosn)
 
 	return {
 		data,
