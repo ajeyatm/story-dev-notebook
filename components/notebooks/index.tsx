@@ -51,7 +51,7 @@ const Notebooks = () => {
                 <ImageWrapper
                   alt={notebook._id}
                   src={
-                    getImageDataURL(notebook.imageId.data) ??
+                    getImageDataURL(notebook.imageId?.data) ??
                     "https://source.unsplash.com/random/300x200?sig=${Math.random()"
                   }
                 />

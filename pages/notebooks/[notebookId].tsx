@@ -29,7 +29,7 @@ const Notebook = () => {
           alt={noteBook._id}
           
           src={
-            getImageDataURL(noteBook.imageId.data) ??
+            getImageDataURL(noteBook.imageId?.data) ??
             "https://source.unsplash.com/random/300x200?sig=${Math.random()"
           }
           banner
